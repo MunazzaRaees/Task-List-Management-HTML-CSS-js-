@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to add a task
     function addTask(title, description, deadline) {
         const task = {
-            title,
+            title1,
             description,
             deadline,
             completed: false
