@@ -1,0 +1,369 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(8px); /* Adds a blur effect on the background */
+}
+
+.menu {
+    width: 20%;
+    background-color: rgba(244, 219, 253, 0.8);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.menu h2 {
+    margin-bottom: 25px;
+}
+
+.menu-section h3 {
+    font-size: 1.3em;
+    margin: 10px 0;
+    color: #555;
+}
+
+.menu-section ul {
+    list-style-type: none;
+    margin-top: 5px;
+}
+
+.menu-section ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    cursor: pointer;
+    color: #333;
+}
+
+.menu-section ul li:hover {
+    color: #555;
+}
+
+.sticky-wall {
+    width: 80%;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.pastel { /* This is the common style for all notes */
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+#stickyNotes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pastel1 { background-color: #f6a5c0; }
+.pastel2 { background-color: #f8d7b5; }
+.pastel3 { background-color: #c8d7f4; }
+.pastel4 { background-color: #b1e7d3; }
+.pastel5 { background-color: #f9e0a9; }
+.pastel6 { background-color: #e7c9f9; }
+.pastel7 { background-color: #a8e3d1; }
+
+
+
+#addTaskModalBtn {
+    /* Your style changes here */
+    background-color: #4CAF50;  /* Example: change background color */
+    color: white;               /* Example: change text color */
+    padding: 10px 20px;         /* Example: add padding */
+    border: none;               /* Example: remove border */
+    border-radius: 5px;         /* Example: add border radius */
+    font-size: 16px;            /* Example: change font size */
+    cursor: pointer;           /* Example: change cursor on hover */
+}
+
+/* Optional: Add hover effect */
+#addTaskModalBtn:hover {
+    background-color: #45a049;  /* Example: change background color on hover */
+}
+
+.note {
+    width: 250px;
+    height: 200px;
+    padding: 10px;
+    background-color: #ffeaa7;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.note h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+/* Style the remove task button (cross 'X') */
+.note button {
+    position: absolute;           /* Position it at the top-right corner */
+    top: 10px;                    /* Add space from the top */
+    right: 10px;                  /* Add space from the right */
+    background-color: #ff4d4d;    /* Red background color for the button */
+    color: white;                 /* White color for the 'X' */
+    border: none;                 /* Remove default border */
+    font-size: 1.5em;             /* Bigger 'X' to make it more prominent */
+    width: 30px;                  /* Set width of the button */
+    height: 30px;                 /* Set height of the button */
+    border-radius: 50%;           /* Make the button round */
+    display: flex;                /* Use flex to center the 'X' */
+    justify-content: center;      /* Center the 'X' horizontally */
+    align-items: center;          /* Center the 'X' vertically */
+    cursor: pointer;             /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease;  /* Smooth transition for color change */
+}
+
+/* Hover effect: darken the red when hovering over the button */
+.note button:hover {
+    background-color: #e60000;  /* Darker red when hovered */
+}
+
+/* Active state effect: Slight shrink effect when clicked */
+.note button:active {
+    transform: scale(0.95);      /* Shrinks the button when clicked */
+}
+
+/* Modal Container Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background: rgba(0, 0, 0, 0.4) ; /* Black overlay with background image */
+    background-size: cover; /* Ensure the image covers the modal background */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content Box */
+.modal-content {
+    height:60%;
+    position: relative;
+    width: 28%; /* Adjust width as needed */
+    max-width: 500px; /* Set a maximum width */
+    padding: 20px; /* Add padding for content */
+    background: url('bg.jpeg') no-repeat center center; /* Background image for modal box */
+    background-size: cover; /* Ensure the image covers the modal background */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for better appearance */
+    color: rgb(2, 0, 0); /* Ensure text is readable against the background */
+}
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+/* Input and Textarea Styling */
+.modal-content input[type="text"],
+.modal-content textarea,
+.modal-content input[type="datetime-local"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Button Styling */
+.modal-content button {
+    width: 95%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#addTaskBtn {
+    background-color: #4caf50; /* Green */
+    color: white;
+}
+
+#addTaskBtn:hover {
+    background-color: #45a049;
+}
+
+#updateTaskBtn {
+    background-color: #2196f3; /* Blue */
+    color: white;
+}
+
+#updateTaskBtn:hover {
+    background-color: #0b7dda;
+}
+
+/* Modal Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content textarea,
+    .modal-content input[type="datetime-local"] {
+        font-size: 14px;
+    }
+
+    .modal-content button {
+        font-size: 14px;
+    }
+}
+
+
+.content {
+    width: 80%;
+    padding: 20px;
+}
+
+#celebrationMessage {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: yellow;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    animation: pop-up 0.5s ease-out forwards;
+}
+
+/* Notes */
+.note {
+    background: #ffeb3b;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Success Message */
+.success-message {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+@keyframes pop-up {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Same as before but with adjustments for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .menu {
+        width: 100%;
+    }
+
+    .content {
+        width: 100%;
+    }
+}
+
+.overdue-message {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    animation: pop-up 2s ;
+}
+
+#messageBox {
+    font-size: 16px;
+    color: #fff;
+}
+
+#messageBox.success {
+    background-color: #4caf50; /* Green for success */
+}
+
+#messageBox.error {
+    background-color: #f44336; /* Red for error */
+}
+
+#error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}

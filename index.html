@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Wall To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="menu">
+            <h2>Menu</h2>
+            <div class="menu-section">
+                <h3>TASKS</h3>
+                <ul>
+                    <li id="upcoming">Upcoming</li>
+                    <li id="today">Today</li>
+                    <li id="calendar">Calendar</li>
+                    <li id="stickyWall">Sticky Wall</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div id="stickyWallContent">
+                <h1>Task Board</h1>
+                <button id="addTaskModalBtn">+ Add Task</button>
+                <div id="stickyNotes"></div>
+            </div>
+
+            <div id="calendarContent" style="display: none;">
+                <h1>Calendar View</h1>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for adding new tasks -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>New Task</h2>
+            <input type="text" id="taskTitle" placeholder="Task title">
+            <textarea id="taskDescription" placeholder="Task description"></textarea>
+            <label>Set Deadline:
+                <input type="datetime-local" id="taskDeadline">
+            </label>
+            <button id="addTaskBtn">Add Task</button>
+        </div>
+    </div>
+
+    <!-- Notification Messages -->
+    <div id="celebrationMessage" class="celebration-message">
+        🎉 Congratulations! You completed your task! 🎉
+    </div>
+    <div id="overdueMessage" class="overdue-message">
+        ⏰ Task deadline passed and is still incomplete!
+    </div>
+
+<!-- Modal for adding/updating tasks -->
+<div id="taskModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2 id="modalTitle">New Task</h2>
+        <input type="text" id="taskTitle" placeholder="Task Title" />
+        <textarea id="taskDescription" placeholder="Task Description"></textarea>
+        <input type="datetime-local" id="taskDeadline" />
+        <button id="addTaskBtn">Add Task</button>
+        <button id="updateTaskBtn" style="display: none;">Update Task</button>
+        
+        <!-- Add the message box here -->
+        <div id="messageBox" class="hidden"></div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
